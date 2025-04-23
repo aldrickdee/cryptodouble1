@@ -44,8 +44,11 @@ export class MemStorage implements IStorage {
     const id = this.currentWalletId++;
     const now = new Date();
     const walletAddress: WalletAddress = { 
-      ...insertWalletAddress, 
       id, 
+      address: insertWalletAddress.address,
+      cryptoType: insertWalletAddress.cryptoType,
+      amount: insertWalletAddress.amount,
+      email: insertWalletAddress.email || null,
       createdAt: now 
     };
     this.walletAddresses.set(id, walletAddress);
