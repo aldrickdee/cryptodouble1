@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, RefObject } from 'react';
+import { useEffect, useState, useRef, RefObject } from 'react';
 
 export function useParallax() {
   const [scrollY, setScrollY] = useState(0);
@@ -9,7 +9,10 @@ export function useParallax() {
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
   
   return { scrollY };
@@ -17,21 +20,21 @@ export function useParallax() {
 
 export function useParallaxElement(): [RefObject<HTMLDivElement>, boolean] {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        setIsInView(entry.isIntersecting);
       },
       {
-        root: null,
         rootMargin: '0px',
         threshold: 0.1
       }
     );
     
     const currentRef = ref.current;
+    
     if (currentRef) {
       observer.observe(currentRef);
     }
@@ -43,5 +46,5 @@ export function useParallaxElement(): [RefObject<HTMLDivElement>, boolean] {
     };
   }, []);
   
-  return [ref, isVisible];
+  return [ref, isInView];
 }

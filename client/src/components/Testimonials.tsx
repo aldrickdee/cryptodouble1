@@ -1,174 +1,91 @@
-import { useState, useEffect, useCallback } from 'react';
+import { Parallax } from 'react-scroll-parallax';
 import { motion } from 'framer-motion';
-import SectionHeading from '@/components/ui/section-heading';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useParallaxElement } from '@/hooks/useParallax';
+import { Star } from 'lucide-react';
+import SectionHeading from './ui/section-heading';
+import ParallaxSection from './ui/parallax-section';
 
 const testimonials = [
   {
-    name: "James Wilson",
-    title: "XRP Investor",
-    testimonial: "I was skeptical at first, but after receiving double my XRP investment, I'm a true believer! The process was smooth and exactly as described.",
-    avatar: "JW",
-    stars: 5,
-    crypto: "xrp"
+    name: "Michael J.",
+    role: "XRP Investor",
+    quote: "I was skeptical at first, but I decided to try with a small amount of XRP. To my surprise, I received double the amount back within 12 hours! Now I'm a regular investor.",
+    avatarBg: "bg-gray-500",
+    rating: 5
   },
   {
-    name: "Sophia Chen",
-    title: "Crypto Enthusiast",
-    testimonial: "Doubled my SUI tokens within 24 hours. This service is incredible! I've recommended it to all my friends in the crypto space.",
-    avatar: "SC",
-    stars: 5,
-    crypto: "sui"
+    name: "Sarah K.",
+    role: "SUI Investor",
+    quote: "The doubling process was seamless. I deposited 500 SUI and received 1000 SUI back the next day. The calculator was spot on with the returns I received.",
+    avatarBg: "bg-gray-600",
+    rating: 5
   },
   {
-    name: "Marcus Johnson",
-    title: "Day Trader",
-    testimonial: "Been trading crypto for years, and this is one of the most reliable services I've found. Doubled my XRP exactly as promised.",
-    avatar: "MJ",
-    stars: 4,
-    crypto: "xrp"
-  },
-  {
-    name: "Emma Thompson",
-    title: "SUI Investor",
-    testimonial: "Quick, secure, and reliable. I've used the service multiple times to double my SUI investments, and it's been perfect every time.",
-    avatar: "ET",
-    stars: 5,
-    crypto: "sui"
-  },
-  {
-    name: "David Rodriguez",
-    title: "Blockchain Developer",
-    testimonial: "As someone who works in the blockchain space, I was impressed by the efficiency of this service. My XRP doubled just as advertised.",
-    avatar: "DR",
-    stars: 4,
-    crypto: "xrp"
-  },
-  {
-    name: "Olivia Park",
-    title: "Long-term Investor",
-    testimonial: "I've been using this service to grow my SUI portfolio steadily. It's become an essential part of my investment strategy.",
-    avatar: "OP",
-    stars: 5,
-    crypto: "sui"
+    name: "Robert T.",
+    role: "XRP & SUI Investor",
+    quote: "I've been doubling both my XRP and SUI holdings for the past month. The consistency and reliability of the service is impressive. The interface makes it easy to track my investments.",
+    avatarBg: "bg-gray-700", 
+    rating: 5
   }
 ];
 
+const bgImage = 'https://images.unsplash.com/photo-1645888759874-7a603ed1cede?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80';
+
 export default function Testimonials() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [displayCount, setDisplayCount] = useState(3);
-  
-  const updateDisplayCount = useCallback(() => {
-    if (window.innerWidth < 768) {
-      setDisplayCount(1);
-    } else if (window.innerWidth < 1024) {
-      setDisplayCount(2);
-    } else {
-      setDisplayCount(3);
-    }
-  }, []);
-  
-  useEffect(() => {
-    updateDisplayCount();
-    
-    window.addEventListener('resize', updateDisplayCount);
-    return () => window.removeEventListener('resize', updateDisplayCount);
-  }, [updateDisplayCount]);
-  
-  const maxIndex = Math.max(0, testimonials.length - displayCount);
-  
-  const handlePrev = () => {
-    setActiveIndex((prev) => Math.max(0, prev - 1));
-  };
-  
-  const handleNext = () => {
-    setActiveIndex((prev) => Math.min(maxIndex, prev + 1));
-  };
-  
-  const visibleTestimonials = testimonials.slice(activeIndex, activeIndex + displayCount);
-  
+  const [ref, isInView] = useParallaxElement();
+
   return (
-    <section id="testimonials" className="py-20 lg:py-32 bg-secondary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ParallaxSection
+      id="testimonials"
+      bgImage={bgImage}
+      className="py-20 lg:py-32 bg-primary"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
-          title="What Our Users Say"
-          subtitle="Hear from investors who have doubled their XRP and SUI with our service"
+          title="What Our Investors Say"
+          subtitle="Here's what people are saying about their doubled investments"
           centered
         />
         
-        <div className="mt-16 relative">
-          <div className="flex overflow-hidden">
+        <div 
+          ref={ref}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16"
+        >
+          {testimonials.map((testimonial, index) => (
             <motion.div
-              className="flex gap-6 w-full"
-              initial={{ opacity: 0 }}
+              key={index}
+              className="bg-secondary/60 backdrop-blur-md p-6 rounded-xl shadow-xl"
+              initial={{ opacity: 0, y: 50 }}
               animate={{ 
-                opacity: 1,
-                x: `calc(-${activeIndex * 100}% / ${displayCount})` 
+                opacity: isInView ? 1 : 0, 
+                y: isInView ? 0 : 50 
               }}
               transition={{ 
-                duration: 0.5,
-                ease: "easeInOut"
+                duration: 0.5, 
+                delay: index * 0.1 
               }}
             >
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  className={`bg-primary rounded-xl p-6 flex-shrink-0 border border-gray-700/50 shadow-lg`}
-                  style={{ width: `calc(100% / ${displayCount})` }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="flex items-center gap-2 mb-4">
-                    {[...Array(testimonial.stars)].map((_, i) => (
-                      <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  
-                  <blockquote className="mb-6 text-gray-300">
-                    "{testimonial.testimonial}"
-                  </blockquote>
-                  
-                  <div className="flex items-center">
-                    <div className={`h-12 w-12 rounded-full flex items-center justify-center mr-4 text-white font-semibold ${
-                      testimonial.crypto === 'xrp' ? 'bg-[#23292F]' : 'bg-[#6BCEFF]'
-                    }`}>
-                      {testimonial.avatar}
-                    </div>
-                    <div>
-                      <div className="font-semibold">{testimonial.name}</div>
-                      <div className="text-sm text-gray-400">{testimonial.title}</div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+              <div className="flex items-center mb-4">
+                <div className={`h-12 w-12 rounded-full ${testimonial.avatarBg} mr-4 flex items-center justify-center text-white font-bold`}>
+                  {testimonial.name.charAt(0)}
+                </div>
+                <div>
+                  <h4 className="font-bold">{testimonial.name}</h4>
+                  <p className="text-sm text-gray-400">{testimonial.role}</p>
+                </div>
+              </div>
+              <p className="text-gray-300">
+                "{testimonial.quote}"
+              </p>
+              <div className="mt-4 flex">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400" fill="currentColor" />
+                ))}
+              </div>
             </motion.div>
-          </div>
-          
-          <div className="flex justify-center mt-8 gap-2">
-            <Button 
-              variant="outline" 
-              size="icon" 
-              onClick={handlePrev} 
-              disabled={activeIndex === 0}
-              className="h-10 w-10 rounded-full"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="icon" 
-              onClick={handleNext} 
-              disabled={activeIndex >= maxIndex}
-              className="h-10 w-10 rounded-full"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </Button>
-          </div>
+          ))}
         </div>
       </div>
-    </section>
+    </ParallaxSection>
   );
 }

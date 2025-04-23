@@ -43,14 +43,10 @@ export class MemStorage implements IStorage {
   async saveWalletAddress(insertWalletAddress: InsertWalletAddress): Promise<WalletAddress> {
     const id = this.currentWalletId++;
     const now = new Date();
-    // Create a valid wallet address object with proper typing
     const walletAddress: WalletAddress = { 
+      ...insertWalletAddress, 
       id, 
-      address: insertWalletAddress.address,
-      cryptoType: insertWalletAddress.cryptoType,
-      amount: insertWalletAddress.amount,
-      email: insertWalletAddress.email ?? null, // Ensure email is string | null
-      createdAt: now
+      createdAt: now 
     };
     this.walletAddresses.set(id, walletAddress);
     return walletAddress;
