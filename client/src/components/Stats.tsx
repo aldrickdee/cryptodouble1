@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { formatNumber } from '@/lib/utils';
 
@@ -10,88 +10,81 @@ interface StatProps {
   delay: number;
 }
 
-const statsData: StatProps[] = [
-  { value: 7500, label: "Successful investments", suffix: "+", color: "text-blue-500", delay: 0 },
-  { value: 100, label: "Return rate", suffix: "%", color: "text-purple-500", delay: 0.1 },
-  { value: 24, label: "Average process time", suffix: "h", color: "text-blue-500", delay: 0.2 },
-  { value: 15, label: "XRP & SUI processed", suffix: "M+", color: "text-purple-500", delay: 0.3 },
-];
-
 function StatCounter({ value, label, suffix = "", color, delay }: StatProps) {
   const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    
-    const currentRef = ref.current;
-    
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-    
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
-  
-  useEffect(() => {
-    if (!isVisible) return;
-    
     let startValue = 0;
-    const duration = 2000; // ms
-    const step = Math.ceil(value / (duration / 16)); // 60fps
+    const endValue = value;
+    const duration = 2000;
+    const startTime = Date.now();
     
-    const timer = setInterval(() => {
-      startValue += step;
+    const timer = setTimeout(() => {
+      const counter = setInterval(() => {
+        const now = Date.now();
+        const progress = Math.min((now - startTime) / duration, 1);
+        const currentValue = Math.floor(progress * (endValue - startValue) + startValue);
+        
+        setCount(currentValue);
+        
+        if (progress === 1) {
+          clearInterval(counter);
+        }
+      }, 20);
       
-      if (startValue > value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(startValue);
-      }
-    }, 16);
+      return () => clearInterval(counter);
+    }, delay);
     
-    return () => clearInterval(timer);
-  }, [isVisible, value]);
-
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+  
   return (
-    <motion.div 
-      className="flex flex-col items-center"
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-      transition={{ duration: 0.5, delay }}
-    >
-      <p className={`text-3xl md:text-4xl font-bold ${color}`}>
+    <div>
+      <p className={`text-4xl md:text-5xl font-bold mb-2 ${color}`}>
         {formatNumber(count)}{suffix}
       </p>
-      <p className="text-gray-400 text-center">{label}</p>
-    </motion.div>
+      <p className="text-gray-400 text-lg">{label}</p>
+    </div>
   );
 }
 
 export default function Stats() {
   return (
-    <section className="bg-secondary py-16">
+    <section className="py-20 bg-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {statsData.map((stat, idx) => (
-            <StatCounter key={idx} {...stat} />
-          ))}
-        </div>
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <StatCounter 
+            value={25000} 
+            label="Total XRP Doubled" 
+            color="text-blue-400"
+            delay={0}
+          />
+          <StatCounter 
+            value={15000} 
+            label="Total SUI Doubled" 
+            color="text-purple-400"
+            delay={200}
+          />
+          <StatCounter 
+            value={98} 
+            label="Success Rate" 
+            suffix="%" 
+            color="text-green-400"
+            delay={400}
+          />
+          <StatCounter 
+            value={1250} 
+            label="Happy Investors" 
+            color="text-yellow-400"
+            delay={600}
+          />
+        </motion.div>
       </div>
     </section>
   );

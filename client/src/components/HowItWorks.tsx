@@ -1,94 +1,93 @@
-import { Parallax } from 'react-scroll-parallax';
 import { motion } from 'framer-motion';
-import { useParallaxElement } from '@/hooks/useParallax';
-import { CheckCircle } from 'lucide-react';
-import SectionHeading from './ui/section-heading';
-import ParallaxSection from './ui/parallax-section';
+import SectionHeading from '@/components/ui/section-heading';
+import { Wallet, ArrowRightLeft, Clock, CreditCard } from 'lucide-react';
 
-const stepsData = [
+const steps = [
   {
-    number: 1,
-    title: "Calculate Your Returns",
-    description: "Use our investment calculator to see how much you'll receive after doubling your XRP or SUI.",
-    features: [
-      "Enter your desired investment amount",
-      "Choose between XRP or SUI cryptocurrency",
-      "See your doubled returns instantly"
-    ]
+    title: "Select Your Crypto",
+    description: "Choose whether you want to double your XRP or SUI cryptocurrency investment.",
+    icon: <Wallet className="h-8 w-8 text-blue-400" />,
+    delay: 0
   },
   {
-    number: 2,
-    title: "Make Your Deposit",
-    description: "Send your XRP or SUI to our secure deposit address using your preferred wallet.",
-    features: [
-      "Copy our verified deposit address",
-      "Send your cryptocurrency from any wallet",
-      "Receive transaction confirmation"
-    ]
+    title: "Make a Deposit",
+    description: "Send your XRP or SUI to our secure wallet address. Minimum deposit varies by crypto.",
+    icon: <CreditCard className="h-8 w-8 text-purple-400" />,
+    delay: 0.1
   },
   {
-    number: 3,
+    title: "Wait for Confirmation",
+    description: "Our system processes your transaction and prepares your doubled amount.",
+    icon: <Clock className="h-8 w-8 text-green-400" />,
+    delay: 0.2
+  },
+  {
     title: "Receive Double Back",
-    description: "Within 24 hours, we'll send back twice the amount of cryptocurrency you deposited.",
-    features: [
-      "100% doubled return guaranteed",
-      "Fast processing within 24 hours",
-      "No hidden fees or commissions"
-    ]
+    description: "Within 24 hours, we'll send double the amount back to your wallet address.",
+    icon: <ArrowRightLeft className="h-8 w-8 text-yellow-400" />,
+    delay: 0.3
   }
 ];
 
-const bgImage = 'https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80';
-
 export default function HowItWorks() {
-  const [ref, isInView] = useParallaxElement();
-
   return (
-    <ParallaxSection
-      id="how-it-works"
-      bgImage={bgImage}
-      className="py-20 lg:py-32 bg-primary"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="how-it-works" className="py-20 lg:py-32 bg-primary">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="How It Works"
-          subtitle="Our proven process doubles your XRP and SUI in three simple steps"
+          subtitle="Our simple 4-step process to double your XRP and SUI investments"
           centered
         />
         
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          {stepsData.map((step, index) => (
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {steps.map((step, index) => (
             <motion.div
-              key={step.number}
-              className="relative bg-secondary/60 backdrop-blur-md p-8 rounded-xl shadow-xl"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ 
-                opacity: isInView ? 1 : 0, 
-                y: isInView ? 0 : 50 
-              }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
-                ease: "easeOut"
-              }}
+              key={index}
+              className="bg-secondary/50 rounded-xl p-6 relative z-10 border border-gray-700/50"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: step.delay }}
+              viewport={{ once: true }}
             >
-              <div className="absolute -top-6 -left-6 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
-                {step.number}
+              <div className="h-14 w-14 rounded-lg bg-primary flex items-center justify-center mb-6">
+                {step.icon}
               </div>
-              <h3 className="text-xl font-bold mb-4 mt-2">{step.title}</h3>
-              <p className="text-gray-300 mb-6">{step.description}</p>
-              <ul className="space-y-2 text-gray-300">
-                {step.features.map((feature, fIndex) => (
-                  <li key={fIndex} className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-blue-500 mr-2 mt-0.5" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+              <p className="text-gray-400">{step.description}</p>
+              
+              {index < steps.length - 1 && (
+                <div className="hidden lg:block absolute top-10 left-full w-8 h-2 transform -translate-x-4">
+                  <div className="h-0.5 bg-blue-500/50 w-full mt-1.5"></div>
+                  <div className="absolute right-0 top-0 h-3 w-3 rounded-full bg-blue-500"></div>
+                </div>
+              )}
+              
+              <div className="absolute -top-3 -right-3 bg-blue-500 h-6 w-6 rounded-full flex items-center justify-center text-sm font-bold">
+                {index + 1}
+              </div>
             </motion.div>
           ))}
         </div>
+        
+        <div className="mt-16 bg-blue-500/10 border border-blue-500/30 rounded-xl p-6 md:p-8">
+          <div className="flex flex-col md:flex-row items-center">
+            <div className="md:w-1/6 mb-4 md:mb-0 flex justify-center">
+              <div className="h-16 w-16 bg-blue-500/20 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            </div>
+            <div className="md:w-5/6 text-center md:text-left">
+              <h3 className="text-xl font-bold mb-2 text-blue-400">Important Information</h3>
+              <p className="text-gray-300">
+                Our system requires a minimum deposit of 10 XRP or 50 SUI. All transactions are processed on the blockchain and can be verified. 
+                For optimal results, please ensure you provide your correct wallet address for return payments.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </ParallaxSection>
+    </section>
   );
 }
