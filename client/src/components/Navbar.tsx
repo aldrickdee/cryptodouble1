@@ -76,24 +76,31 @@ export default function Navbar() {
       
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-secondary shadow-lg p-4 space-y-3">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="block py-2 text-sm font-medium hover:text-blue-500 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {item.name}
-            </a>
-          ))}
-          <a
-            href="#deposit"
-            className="block bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition-colors text-center mt-4"
-            onClick={() => setIsOpen(false)}
-          >
-            Start Now
-          </a>
+        <div className="md:hidden fixed top-[60px] left-0 right-0 bottom-0 bg-gradient-to-b from-secondary/95 to-primary/95 backdrop-blur-lg p-4 space-y-3 overflow-auto z-50 animate-in slide-in-from-top duration-300">
+          <div className="flex flex-col h-full">
+            <div className="space-y-2 py-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="block py-4 px-3 text-base font-medium hover:text-blue-500 transition-colors rounded-xl hover:bg-white/5 active:bg-white/10 flex items-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span className="ml-2">{item.name}</span>
+                </a>
+              ))}
+            </div>
+            
+            <div className="mt-auto pb-8 pt-4">
+              <a
+                href="#deposit"
+                className="block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-4 rounded-xl text-center font-medium text-lg shadow-lg hover:shadow-xl transition-all active:scale-95"
+                onClick={() => setIsOpen(false)}
+              >
+                Start Doubling Now
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </nav>

