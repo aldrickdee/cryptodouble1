@@ -1,30 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronUp } from 'lucide-react';
-import SectionHeading from './ui/section-heading';
-
-const faqItems = [
-  {
-    question: "How does the doubling process work?",
-    answer: "Our investment platform utilizes advanced blockchain technology and market strategies to double your XRP and SUI cryptocurrency. When you deposit your assets, our system immediately allocates them to our proprietary trading algorithm that leverages market inefficiencies to generate returns. Within 24 hours, we return double your initial investment to your wallet."
-  },
-  {
-    question: "Is there a minimum or maximum investment amount?",
-    answer: "The minimum investment amount is 10 XRP or 50 SUI. This ensures that transaction fees don't significantly impact your returns. While there's no hard maximum, for larger investments (over 10,000 XRP or 50,000 SUI), we recommend contacting our team directly for personalized handling of your investment."
-  },
-  {
-    question: "How long does it take to receive my doubled returns?",
-    answer: "In most cases, you'll receive your doubled cryptocurrency within 24 hours. The exact time can vary depending on network congestion and the size of your investment. Smaller investments typically process faster, often within 6-12 hours. You can always check the status of your investment in your account dashboard."
-  },
-  {
-    question: "Are there any fees for using this service?",
-    answer: "No, there are no fees associated with our doubling service. You'll receive exactly double the amount you deposit. The only costs you might incur are the standard blockchain network fees for transferring cryptocurrency, which are not charged by us but are part of the blockchain infrastructure."
-  },
-  {
-    question: "How is the platform able to guarantee double returns?",
-    answer: "Our platform leverages a combination of cryptocurrency arbitrage, yield farming on DeFi protocols, and strategic market positioning. We've developed a sophisticated system that takes advantage of price discrepancies across various exchanges and liquidity pools. This allows us to generate consistent returns that fund our double-your-investment promise."
-  }
-];
+import SectionHeading from '@/components/ui/section-heading';
+import { ChevronDown } from 'lucide-react';
 
 interface AccordionItemProps {
   question: string;
@@ -37,32 +14,34 @@ interface AccordionItemProps {
 function AccordionItem({ question, answer, isOpen, onClick, index }: AccordionItemProps) {
   return (
     <motion.div 
-      className="bg-secondary rounded-xl overflow-hidden"
+      className="border-b border-gray-700/50 last:border-0"
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.3 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      viewport={{ once: true }}
     >
-      <button 
-        className="w-full flex justify-between items-center p-6 text-left"
+      <button
+        className="flex justify-between items-center w-full py-4 text-left"
         onClick={onClick}
-        aria-expanded={isOpen}
       >
-        <span className="font-bold">{question}</span>
-        <ChevronUp 
-          className={`h-5 w-5 transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+        <span className="text-lg font-medium">{question}</span>
+        <ChevronDown 
+          className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''} text-blue-400`} 
+          size={20} 
         />
       </button>
-      
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="px-6 pb-6"
+            className="overflow-hidden"
           >
-            <p className="text-gray-300">{answer}</p>
+            <div className="pb-4 text-gray-300">
+              {answer}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -70,8 +49,43 @@ function AccordionItem({ question, answer, isOpen, onClick, index }: AccordionIt
   );
 }
 
+const faqItems = [
+  {
+    question: "How does the cryptocurrency doubling process work?",
+    answer: "Our platform uses advanced trading algorithms and strategic market positioning to generate returns. When you deposit XRP or SUI tokens, our system immediately begins executing trades to double your investment, returning the doubled amount to your wallet within 24 hours."
+  },
+  {
+    question: "Is there a minimum investment amount?",
+    answer: "Yes, the minimum deposit amount is 10 XRP or 50 SUI. This ensures we have enough volume to execute our doubling strategy effectively."
+  },
+  {
+    question: "How long does it take to receive my doubled cryptocurrency?",
+    answer: "You'll receive your doubled XRP or SUI within 24 hours of your initial deposit. In most cases, returns are processed much faster, often within just a few hours."
+  },
+  {
+    question: "Are there any fees for using this service?",
+    answer: "There are no additional fees for using our service. What you see is what you get - deposit the amount you want to invest, and receive double that amount back."
+  },
+  {
+    question: "Is my investment secure?",
+    answer: "Yes, we employ industry-standard security measures to protect all deposits. Our platform operates on secure servers with advanced encryption to ensure all transactions are safe."
+  },
+  {
+    question: "What happens if the market crashes during my investment period?",
+    answer: "Our doubling strategy is market-neutral, meaning it works regardless of market conditions. Even if prices fall dramatically, you'll still receive double your original investment amount."
+  },
+  {
+    question: "Can I make multiple deposits?",
+    answer: "Absolutely! You can make as many deposits as you like. Each deposit will be processed separately and doubled within 24 hours."
+  },
+  {
+    question: "Which wallets are compatible with your service?",
+    answer: "Our service works with any standard XRP or SUI wallet. As long as you can send and receive XRP or SUI, you can use our cryptocurrency doubling service."
+  }
+];
+
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -82,11 +96,11 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Frequently Asked Questions"
-          subtitle="Everything you need to know about doubling your XRP and SUI"
+          subtitle="Get answers to common questions about our cryptocurrency doubling service"
           centered
         />
         
-        <div className="space-y-6 mt-16">
+        <div className="mt-16 rounded-xl bg-secondary/50 border border-gray-700/50 overflow-hidden divide-y divide-gray-700/50">
           {faqItems.map((item, index) => (
             <AccordionItem
               key={index}
@@ -97,6 +111,15 @@ export default function FAQ() {
               index={index}
             />
           ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <p className="text-gray-300">
+            Don't see your question answered here? 
+            <a href="#contact" className="text-blue-400 hover:text-blue-300 ml-1">
+              Contact our support team
+            </a>
+          </p>
         </div>
       </div>
     </section>

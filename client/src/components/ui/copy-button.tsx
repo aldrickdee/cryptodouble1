@@ -1,45 +1,50 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { Copy, Check } from 'lucide-react';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 interface CopyButtonProps {
   value: string;
 }
 
 export default function CopyButton({ value }: CopyButtonProps) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
+  const [isCopied, setIsCopied] = useState(false);
+  const { toast } = useToast();
+  
+  const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(value);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
+      setIsCopied(true);
+      
+      toast({
+        title: "Copied to clipboard",
+        description: "The address has been copied to your clipboard.",
+      });
+      
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    } catch (error) {
+      toast({
+        title: "Failed to copy",
+        description: "Please try copying manually.",
+        variant: "destructive",
+      });
     }
   };
-
+  
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={handleCopy}
-            className="bg-secondary px-4 py-4 h-auto rounded-none hover:bg-gray-700 transition-colors"
-          >
-            {copied ? 
-              <Check className="h-5 w-5" /> : 
-              <Copy className="h-5 w-5" />
-            }
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">
-          {copied ? 'Copied!' : 'Copy to clipboard'}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Button 
+      variant="ghost"
+      size="sm"
+      onClick={copyToClipboard}
+      className="h-full px-4 rounded-none border-l border-gray-700"
+    >
+      {isCopied ? (
+        <Check className="h-4 w-4 text-green-400" />
+      ) : (
+        <Copy className="h-4 w-4" />
+      )}
+    </Button>
   );
 }

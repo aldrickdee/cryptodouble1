@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { useParallax } from '@/hooks/useParallax';
+import { useParallaxElement } from '@/hooks/useParallax';
 import xrpLogo from '@/assets/icons/xrp-logo.svg';
 import suiLogo from '@/assets/icons/sui-logo.svg';
 
 export default function Hero() {
-  const { ref: parallaxRef } = useParallax();
+  const [parallaxRef, isVisible] = useParallaxElement();
   
   return (
     <div className="relative pt-20 pb-32 overflow-hidden bg-primary">
