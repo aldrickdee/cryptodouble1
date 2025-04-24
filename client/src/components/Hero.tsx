@@ -36,8 +36,8 @@ export default function Hero() {
             repeat: Infinity,
           }}
         >
-          <div className="w-full h-full bg-[#23292F] rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-lg font-bold text-white">XRP</span>
+          <div className="w-full h-full bg-black rounded-full flex items-center justify-center shadow-lg">
+            <span className="text-[10px] font-bold text-[#00FFA3]">SOLANA</span>
           </div>
         </motion.div>
         
@@ -72,7 +72,7 @@ export default function Hero() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
             <span className="text-white">Double Your</span>
             <div className="flex flex-wrap gap-x-4 mt-1">
-              <span className="bg-gradient-to-r from-[#23292F] to-[#6BCEFF] text-transparent bg-clip-text">XRP</span>
+              <span className="bg-gradient-to-r from-[#00FFA3] to-[#01E8A3] text-transparent bg-clip-text">Solana</span>
               <span className="text-white">&</span>
               <span className="bg-gradient-to-r from-[#6BCEFF] to-blue-500 text-transparent bg-clip-text">SUI</span>
             </div>
@@ -81,7 +81,7 @@ export default function Hero() {
           
           <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-xl">
             Maximize your cryptocurrency portfolio with our proven investment strategy. 
-            Double your XRP and SUI holdings within our secure platform.
+            Double your Solana and SUI holdings within our secure platform.
           </p>
           
           {/* Mobile-friendly button layout - stacked on small screens */}
@@ -137,8 +137,8 @@ export default function Hero() {
         <div className="hidden md:flex justify-center items-center relative">
           <div className="absolute h-72 w-72 rounded-full bg-blue-500/30 blur-3xl"></div>
           <Parallax speed={-5} className="w-40 h-40 absolute top-1/4 right-1/3">
-            <div className="w-40 h-40 bg-[#23292F] rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-3xl font-bold text-white">XRP</span>
+            <div className="w-40 h-40 bg-black rounded-full flex items-center justify-center shadow-lg">
+              <span className="text-xl font-bold text-[#00FFA3]">SOLANA</span>
             </div>
           </Parallax>
           <Parallax speed={5} className="w-40 h-40 absolute bottom-1/4 left-1/3">

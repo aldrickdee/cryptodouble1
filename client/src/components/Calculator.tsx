@@ -19,9 +19,9 @@ import { ArrowDown } from 'lucide-react';
 import { calculateDouble, walletAddresses } from '@/lib/utils';
 
 // SVG Icons
-const XRPIcon = () => (
-  <div className="w-10 h-10 mr-3 rounded-full bg-[#23292F] flex items-center justify-center">
-    <span className="font-bold text-white">XRP</span>
+const SolanaIcon = () => (
+  <div className="w-10 h-10 mr-3 rounded-full bg-black flex items-center justify-center">
+    <span className="font-bold text-[#00FFA3]">SOL</span>
   </div>
 );
 
@@ -42,7 +42,7 @@ const calculatorSchema = z.object({
 type CalculatorFormValues = z.infer<typeof calculatorSchema>;
 
 export default function Calculator() {
-  const [selectedCrypto, setSelectedCrypto] = useState<'xrp' | 'sui'>('xrp');
+  const [selectedCrypto, setSelectedCrypto] = useState<'solana' | 'sui'>('solana');
   const [calculatedAmount, setCalculatedAmount] = useState<number>(200);
   
   const form = useForm<CalculatorFormValues>({
@@ -65,14 +65,14 @@ export default function Calculator() {
     }
   }
   
-  const minDeposit = selectedCrypto === 'xrp' ? 10 : 50;
+  const minDeposit = selectedCrypto === 'solana' ? 0.1 : 50;
 
   return (
     <section id="calculator" className="py-20 lg:py-32 bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Calculate Your Returns"
-          subtitle="Use our investment calculator to see how much you'll receive when you double your XRP or SUI"
+          subtitle="Use our investment calculator to see how much you'll receive when you double your Solana or SUI"
           centered
         />
         
@@ -83,14 +83,14 @@ export default function Calculator() {
             <div className="flex rounded-xl bg-secondary/50 p-1">
               <button
                 className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
-                  selectedCrypto === 'xrp' 
-                    ? 'bg-[#23292F] text-white shadow-lg' 
+                  selectedCrypto === 'solana' 
+                    ? 'bg-black text-[#00FFA3] shadow-lg' 
                     : 'text-gray-400 hover:text-white'
                 }`}
-                onClick={() => setSelectedCrypto('xrp')}
+                onClick={() => setSelectedCrypto('solana')}
               >
-                <XRPIcon />
-                <span className="ml-2">XRP</span>
+                <SolanaIcon />
+                <span className="ml-2">Solana</span>
               </button>
               <button
                 className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
@@ -111,7 +111,7 @@ export default function Calculator() {
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-lg font-bold">Your Investment</h3>
                   <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    selectedCrypto === 'xrp' ? 'bg-[#23292F]/20 text-white' : 'bg-[#6BCEFF]/20 text-white'
+                    selectedCrypto === 'solana' ? 'bg-black/20 text-[#00FFA3]' : 'bg-[#6BCEFF]/20 text-white'
                   }`}>
                     {selectedCrypto.toUpperCase()}
                   </div>
@@ -204,12 +204,12 @@ export default function Calculator() {
                         type="button"
                         variant="outline"
                         className={`flex items-center justify-start p-4 h-auto ${
-                          selectedCrypto === 'xrp' ? 'bg-[#23292F]/10 border-[#23292F]' : ''
+                          selectedCrypto === 'solana' ? 'bg-black/10 border-[#00FFA3]' : ''
                         }`}
-                        onClick={() => setSelectedCrypto('xrp')}
+                        onClick={() => setSelectedCrypto('solana')}
                       >
-                        <XRPIcon />
-                        <span className="font-medium">XRP</span>
+                        <SolanaIcon />
+                        <span className="font-medium">Solana</span>
                       </Button>
                       <Button
                         type="button"
