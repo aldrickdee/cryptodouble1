@@ -23,8 +23,8 @@ import ParallaxSection from './ui/parallax-section';
 
 // SVG Icons
 const SolanaIcon = () => (
-  <div className="w-10 h-10 mr-3 rounded-full bg-black flex items-center justify-center">
-    <span className="font-bold text-[#00FFA3]">SOL</span>
+  <div className="w-10 h-10 mr-3 rounded-full bg-violet-600 flex items-center justify-center">
+    <span className="font-bold text-white">SOL</span>
   </div>
 );
 
@@ -134,7 +134,7 @@ export default function Deposit() {
               <button
                 className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
                   selectedCrypto === 'solana' 
-                    ? 'bg-black text-[#00FFA3] shadow-lg' 
+                    ? 'bg-violet-600 text-white shadow-lg' 
                     : 'text-gray-400 hover:text-white'
                 }`}
                 onClick={() => setSelectedCrypto('solana')}
@@ -160,7 +160,7 @@ export default function Deposit() {
                 <div className="flex justify-between items-center mb-3">
                   <h3 className="text-base font-bold">Deposit Address</h3>
                   {selectedCrypto === 'solana' ? (
-                    <div className="px-3 py-1 rounded-full text-xs bg-black/20 text-[#00FFA3]">
+                    <div className="px-3 py-1 rounded-full text-xs bg-violet-600/20 text-white">
                       Solana Network
                     </div>
                   ) : (
@@ -265,7 +265,7 @@ export default function Deposit() {
                       type="button"
                       variant="outline"
                       className={`flex items-center justify-start p-4 h-auto ${
-                        selectedCrypto === 'solana' ? 'bg-black/10 border-[#00FFA3]' : ''
+                        selectedCrypto === 'solana' ? 'bg-violet-600/10 border-violet-500 text-white' : ''
                       }`}
                       onClick={() => setSelectedCrypto('solana')}
                     >
