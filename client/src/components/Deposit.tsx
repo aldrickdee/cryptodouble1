@@ -177,7 +177,7 @@ export default function Deposit() {
                   <div className="border-t border-gray-700/50 flex">
                     <CopyButton value={walletAddress} />
                     <div className="flex-1 p-2 text-xs text-center text-blue-400">
-                      Send only {selectedCrypto.toUpperCase()} to this address
+                      Send only {selectedCrypto === 'solana' ? 'SOL' : 'SUI'} to this address
                     </div>
                   </div>
                 </div>

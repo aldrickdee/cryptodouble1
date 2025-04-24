@@ -113,7 +113,7 @@ export default function Calculator() {
                   <div className={`px-3 py-1 rounded-full text-xs font-medium ${
                     selectedCrypto === 'solana' ? 'bg-black/20 text-[#00FFA3]' : 'bg-[#6BCEFF]/20 text-white'
                   }`}>
-                    {selectedCrypto.toUpperCase()}
+                    {selectedCrypto === 'solana' ? 'SOL' : 'SUI'}
                   </div>
                 </div>
                 
@@ -129,7 +129,7 @@ export default function Calculator() {
                       className="w-full pl-24 pr-12 py-4 rounded-xl bg-primary/60 border-none text-right text-xl font-bold focus:ring-2 focus:ring-blue-500"
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center pr-4">
-                      <span className="text-gray-400">{selectedCrypto.toUpperCase()}</span>
+                      <span className="text-gray-400">{selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span>
                     </div>
                   </div>
                   
