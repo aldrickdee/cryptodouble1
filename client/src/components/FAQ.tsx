@@ -6,11 +6,11 @@ import SectionHeading from './ui/section-heading';
 const faqItems = [
   {
     question: "How does the doubling process work?",
-    answer: "Our investment platform utilizes advanced blockchain technology and market strategies to double your XRP and SUI cryptocurrency. When you deposit your assets, our system immediately allocates them to our proprietary trading algorithm that leverages market inefficiencies to generate returns. Within 24 hours, we return double your initial investment to your wallet."
+    answer: "Our investment platform utilizes advanced blockchain technology and market strategies to double your SOL and SUI cryptocurrency. When you deposit your assets, our system immediately allocates them to our proprietary trading algorithm that leverages market inefficiencies to generate returns. Within 24 hours, we return double your initial investment to your wallet."
   },
   {
     question: "Is there a minimum or maximum investment amount?",
-    answer: "The minimum investment amount is 10 XRP or 50 SUI. This ensures that transaction fees don't significantly impact your returns. While there's no hard maximum, for larger investments (over 10,000 XRP or 50,000 SUI), we recommend contacting our team directly for personalized handling of your investment."
+    answer: "The minimum investment amount is 1 SOL or 100 SUI. This ensures that transaction fees don't significantly impact your returns. While there's no hard maximum, for larger investments (over 1,000 SOL or 50,000 SUI), we recommend contacting our team directly for personalized handling of your investment."
   },
   {
     question: "How long does it take to receive my doubled returns?",
@@ -82,7 +82,7 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Frequently Asked Questions"
-          subtitle="Everything you need to know about doubling your XRP and SUI"
+          subtitle="Everything you need to know about doubling your SOL and SUI"
           centered
         />
         

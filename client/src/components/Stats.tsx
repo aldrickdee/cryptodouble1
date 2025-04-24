@@ -14,7 +14,7 @@ const statsData: StatProps[] = [
   { value: 7500, label: "Successful investments", suffix: "+", color: "text-blue-500", delay: 0 },
   { value: 100, label: "Return rate", suffix: "%", color: "text-purple-500", delay: 0.1 },
   { value: 24, label: "Average process time", suffix: "h", color: "text-blue-500", delay: 0.2 },
-  { value: 15, label: "XRP & SUI processed", suffix: "M+", color: "text-purple-500", delay: 0.3 },
+  { value: 15, label: "SOL & SUI processed", suffix: "M+", color: "text-purple-500", delay: 0.3 },
 ];
 
 function StatCounter({ value, label, suffix = "", color, delay }: StatProps) {

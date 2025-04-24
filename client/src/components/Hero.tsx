@@ -37,7 +37,7 @@ export default function Hero() {
           }}
         >
           <div className="w-full h-full bg-black rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-[10px] font-bold text-[#00FFA3]">SOLANA</span>
+            <span className="text-[10px] font-bold text-[#00FFA3]">SOL</span>
           </div>
         </motion.div>
         
@@ -138,7 +138,7 @@ export default function Hero() {
           <div className="absolute h-72 w-72 rounded-full bg-blue-500/30 blur-3xl"></div>
           <Parallax speed={-5} className="w-40 h-40 absolute top-1/4 right-1/3">
             <div className="w-40 h-40 bg-black rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-xl font-bold text-[#00FFA3]">SOLANA</span>
+              <span className="text-xl font-bold text-[#00FFA3]">SOL</span>
             </div>
           </Parallax>
           <Parallax speed={5} className="w-40 h-40 absolute bottom-1/4 left-1/3">
