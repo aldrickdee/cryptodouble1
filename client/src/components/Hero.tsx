@@ -72,7 +72,7 @@ export default function Hero() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
             <span className="text-white">Double Your</span>
             <div className="flex flex-wrap gap-x-4 mt-1">
-              <span className="bg-gradient-to-r from-violet-500 to-violet-700 text-transparent bg-clip-text">Solana</span>
+              <span className="bg-gradient-to-r from-violet-500 to-violet-700 text-transparent bg-clip-text">SOL</span>
               <span className="text-white">&</span>
               <span className="bg-gradient-to-r from-[#6BCEFF] to-blue-500 text-transparent bg-clip-text">SUI</span>
             </div>
@@ -81,7 +81,7 @@ export default function Hero() {
           
           <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-xl">
             Maximize your cryptocurrency portfolio with our proven investment strategy. 
-            Double your Solana and SUI holdings within our secure platform.
+            Double your SOL and SUI holdings within our secure platform.
           </p>
           
           {/* Mobile-friendly button layout - stacked on small screens */}

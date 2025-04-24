@@ -161,7 +161,7 @@ export default function Deposit() {
                   <h3 className="text-base font-bold">Deposit Address</h3>
                   {selectedCrypto === 'solana' ? (
                     <div className="px-3 py-1 rounded-full text-xs bg-violet-600/20 text-white">
-                      Solana Network
+                      SOL Network
                     </div>
                   ) : (
                     <div className="px-3 py-1 rounded-full text-xs bg-[#6BCEFF]/20 text-white">

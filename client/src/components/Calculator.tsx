@@ -72,7 +72,7 @@ export default function Calculator() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Calculate Your Returns"
-          subtitle="Use our investment calculator to see how much you'll receive when you double your Solana or SUI"
+          subtitle="Use our investment calculator to see how much you'll receive when you double your SOL or SUI"
           centered
         />
         
@@ -90,7 +90,7 @@ export default function Calculator() {
                 onClick={() => setSelectedCrypto('solana')}
               >
                 <SolanaIcon />
-                <span className="ml-2">Solana</span>
+                <span className="ml-2">SOL</span>
               </button>
               <button
                 className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
@@ -209,7 +209,7 @@ export default function Calculator() {
                         onClick={() => setSelectedCrypto('solana')}
                       >
                         <SolanaIcon />
-                        <span className="font-medium">Solana</span>
+                        <span className="font-medium">SOL</span>
                       </Button>
                       <Button
                         type="button"
