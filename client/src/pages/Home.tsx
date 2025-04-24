@@ -6,6 +6,7 @@ import Calculator from '@/components/Calculator';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Deposit from '@/components/Deposit';
+import LiveTransactions from '@/components/LiveTransactions';
 import Footer from '@/components/Footer';
 import MobileNav from '@/components/MobileNav';
 import { ParallaxProvider } from 'react-scroll-parallax';
@@ -22,6 +23,7 @@ export default function Home() {
         <Testimonials />
         <FAQ />
         <Deposit />
+        <LiveTransactions />
         <Footer />
         <MobileNav />
       </div>
