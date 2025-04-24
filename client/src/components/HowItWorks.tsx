@@ -9,17 +9,17 @@ const stepsData = [
   {
     number: 1,
     title: "Calculate Your Returns",
-    description: "Use our investment calculator to see how much you'll receive after doubling your XRP or SUI.",
+    description: "Use our investment calculator to see how much you'll receive after doubling your SOL or SUI.",
     features: [
       "Enter your desired investment amount",
-      "Choose between XRP or SUI cryptocurrency",
+      "Choose between SOL or SUI cryptocurrency",
       "See your doubled returns instantly"
     ]
   },
   {
     number: 2,
     title: "Make Your Deposit",
-    description: "Send your XRP or SUI to our secure deposit address using your preferred wallet.",
+    description: "Send your SOL or SUI to our secure deposit address using your preferred wallet.",
     features: [
       "Copy our verified deposit address",
       "Send your cryptocurrency from any wallet",
@@ -52,7 +52,7 @@ export default function HowItWorks() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           title="How It Works"
-          subtitle="Our proven process doubles your XRP and SUI in three simple steps"
+          subtitle="Our proven process doubles your SOL and SUI in three simple steps"
           centered
         />
         
