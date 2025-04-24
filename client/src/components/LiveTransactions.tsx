@@ -80,13 +80,13 @@ export default function LiveTransactions() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-4">Live Transactions</h2>
-          <p className="text-gray-400 max-w-3xl mx-auto">
+          <p className="text-white max-w-3xl mx-auto">
             Watch real-time as users from around the world double their cryptocurrency investments
           </p>
         </div>
         
         <div className="bg-black/40 backdrop-blur-md rounded-xl p-4 overflow-hidden">
-          <div className="flex justify-between text-sm text-gray-500 mb-4 px-4">
+          <div className="flex justify-between text-sm text-white mb-4 px-4 font-medium">
             <span className="hidden sm:block flex-1">Type</span>
             <span className="flex-1">Amount</span>
             <span className="hidden md:block flex-1">From</span>
