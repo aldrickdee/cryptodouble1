@@ -1,7 +1,7 @@
 import { Link } from 'wouter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Facebook, Twitter, Instagram, GitPullRequest, Mail, ShoppingBag } from 'lucide-react';
+import { Mail, ShoppingBag } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -10,21 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-bold mb-4">CryptoDouble</h3>
-            <p className="text-gray-400 mb-4">The fastest way to double your XRP and SUI investments. Our platform uses advanced blockchain technology to maximize your cryptocurrency portfolio.</p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Facebook className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Instagram className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <GitPullRequest className="h-6 w-6" />
-              </a>
-            </div>
+            <p className="text-gray-400 mb-4">The fastest way to double your SOL and SUI investments. Our platform uses advanced blockchain technology to maximize your cryptocurrency portfolio.</p>
           </div>
           
           <div>
