@@ -65,7 +65,7 @@ export default function Calculator() {
     }
   }
   
-  const minDeposit = selectedCrypto === 'solana' ? 0.1 : 50;
+  const minDeposit = selectedCrypto === 'solana' ? 1 : 100;
 
   return (
     <section id="calculator" className="py-20 lg:py-32 bg-primary">
