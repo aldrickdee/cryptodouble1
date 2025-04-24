@@ -149,7 +149,7 @@ export default function Calculator() {
                       >
                         {calculatedAmount}
                       </motion.span>
-                      <span className="text-lg text-blue-500">{selectedCrypto.toUpperCase()}</span>
+                      <span className="text-lg text-blue-500">{selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span>
                     </div>
                   </div>
                   
@@ -164,7 +164,7 @@ export default function Calculator() {
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Minimum Deposit:</span>
-                      <span className="font-medium">{minDeposit} {selectedCrypto.toUpperCase()}</span>
+                      <span className="font-medium">{minDeposit} {selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span>
                     </div>
                   </div>
                 </div>
@@ -240,7 +240,7 @@ export default function Calculator() {
                               className="pr-16"
                             />
                             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                              <span className="text-gray-500 sm:text-sm">{selectedCrypto.toUpperCase()}</span>
+                              <span className="text-gray-500 sm:text-sm">{selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span>
                             </div>
                           </div>
                         </FormControl>
@@ -287,7 +287,7 @@ export default function Calculator() {
                   <p className="text-sm text-gray-400 mb-1">You Send</p>
                   <div className="flex justify-between items-end">
                     <span className="text-2xl font-bold">{form.watch('investmentAmount') || 100}</span>
-                    <span className="text-lg">{selectedCrypto.toUpperCase()}</span>
+                    <span className="text-lg">{selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span>
                   </div>
                 </div>
                 
@@ -306,7 +306,7 @@ export default function Calculator() {
                   <p className="text-sm text-blue-500 mb-1">You Receive (Doubled)</p>
                   <div className="flex justify-between items-end">
                     <span className="text-3xl font-bold text-blue-500">{calculatedAmount}</span>
-                    <span className="text-lg text-blue-500">{selectedCrypto.toUpperCase()}</span>
+                    <span className="text-lg text-blue-500">{selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span>
                   </div>
                 </motion.div>
                 
@@ -321,7 +321,7 @@ export default function Calculator() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-400">Minimum Deposit:</span>
-                    <span className="font-medium">{minDeposit} {selectedCrypto.toUpperCase()}</span>
+                    <span className="font-medium">{minDeposit} {selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span>
                   </div>
                 </div>
               </div>
