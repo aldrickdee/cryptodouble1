@@ -10,7 +10,7 @@ export function formatNumber(value: number): string {
 }
 
 export const walletAddresses = {
-  xrp: "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+  solana: "4Zw8JRw5eLLGWCbiMPKBQZ4ptqUGtK9nJ7sJckZZXtC3",
   sui: "0x5c1e88b39e6374a6a246332afc02d3d7c521fc31"
 };
 

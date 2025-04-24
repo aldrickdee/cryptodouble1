@@ -18,12 +18,13 @@ import { useToast } from '@/hooks/use-toast';
 import { walletAddresses } from '@/lib/utils';
 import { AlertTriangle } from 'lucide-react';
 import CopyButton from '@/components/ui/copy-button';
+
 import ParallaxSection from './ui/parallax-section';
 
 // SVG Icons
-const XRPIcon = () => (
-  <div className="w-10 h-10 mr-3 rounded-full bg-[#23292F] flex items-center justify-center">
-    <span className="font-bold text-white">XRP</span>
+const SolanaIcon = () => (
+  <div className="w-10 h-10 mr-3 rounded-full bg-black flex items-center justify-center">
+    <span className="font-bold text-[#00FFA3]">SOL</span>
   </div>
 );
 
@@ -43,7 +44,7 @@ const steps = [
   {
     number: 1,
     title: "Choose Your Cryptocurrency",
-    description: "Select whether you want to invest XRP or SUI"
+    description: "Select whether you want to invest SOL or SUI"
   },
   {
     number: 2,
@@ -65,7 +66,7 @@ const steps = [
 const bgImage = 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80';
 
 export default function Deposit() {
-  const [selectedCrypto, setSelectedCrypto] = useState<'xrp' | 'sui'>('xrp');
+  const [selectedCrypto, setSelectedCrypto] = useState<'solana' | 'sui'>('solana');
   const { toast } = useToast();
   
   const form = useForm<DepositsFormValues>({
@@ -82,11 +83,11 @@ export default function Deposit() {
     });
   }
   
-  const walletAddress = selectedCrypto === 'xrp' 
-    ? walletAddresses.xrp 
+  const walletAddress = selectedCrypto === 'solana' 
+    ? walletAddresses.solana 
     : walletAddresses.sui;
   
-  const minDeposit = selectedCrypto === 'xrp' ? 10 : 50;
+  const minDeposit = selectedCrypto === 'solana' ? 1 : 100;
 
   return (
     <ParallaxSection
@@ -132,14 +133,14 @@ export default function Deposit() {
             <div className="flex rounded-t-xl bg-secondary p-1">
               <button
                 className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
-                  selectedCrypto === 'xrp' 
-                    ? 'bg-[#23292F] text-white shadow-lg' 
+                  selectedCrypto === 'solana' 
+                    ? 'bg-black text-[#00FFA3] shadow-lg' 
                     : 'text-gray-400 hover:text-white'
                 }`}
-                onClick={() => setSelectedCrypto('xrp')}
+                onClick={() => setSelectedCrypto('solana')}
               >
-                <XRPIcon />
-                <span className="ml-2">XRP</span>
+                <SolanaIcon />
+                <span className="ml-2">SOL</span>
               </button>
               <button
                 className={`flex-1 flex items-center justify-center py-3 rounded-lg text-sm font-medium ${
@@ -158,9 +159,9 @@ export default function Deposit() {
               <div className="mb-5">
                 <div className="flex justify-between items-center mb-3">
                   <h3 className="text-base font-bold">Deposit Address</h3>
-                  {selectedCrypto === 'xrp' ? (
-                    <div className="px-3 py-1 rounded-full text-xs bg-[#23292F]/20 text-white">
-                      XRP Network
+                  {selectedCrypto === 'solana' ? (
+                    <div className="px-3 py-1 rounded-full text-xs bg-black/20 text-[#00FFA3]">
+                      Solana Network
                     </div>
                   ) : (
                     <div className="px-3 py-1 rounded-full text-xs bg-[#6BCEFF]/20 text-white">
@@ -186,7 +187,7 @@ export default function Deposit() {
                 <div className="flex">
                   <AlertTriangle className="h-4 w-4 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-yellow-200">
-                    Minimum deposit: <span className="font-medium">{minDeposit} {selectedCrypto.toUpperCase()}</span>. Processing time: up to 24 hours.
+                    Minimum deposit: <span className="font-medium">{minDeposit} {selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span>. Processing time: up to 24 hours.
                   </p>
                 </div>
               </div>
@@ -228,7 +229,7 @@ export default function Deposit() {
         <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Double Your Investment?</h2>
-            <p className="text-xl text-gray-300 mb-8">Follow these simple steps to get started with your XRP or SUI investment</p>
+            <p className="text-xl text-gray-300 mb-8">Follow these simple steps to get started with your SOL or SUI investment</p>
             
             <div className="space-y-6">
               {steps.map((step) => (
@@ -264,12 +265,12 @@ export default function Deposit() {
                       type="button"
                       variant="outline"
                       className={`flex items-center justify-start p-4 h-auto ${
-                        selectedCrypto === 'xrp' ? 'bg-[#23292F]/10 border-[#23292F]' : ''
+                        selectedCrypto === 'solana' ? 'bg-black/10 border-[#00FFA3]' : ''
                       }`}
-                      onClick={() => setSelectedCrypto('xrp')}
+                      onClick={() => setSelectedCrypto('solana')}
                     >
-                      <XRPIcon />
-                      <span className="font-medium">XRP</span>
+                      <SolanaIcon />
+                      <span className="font-medium">Solana</span>
                     </Button>
                     <Button
                       type="button"
@@ -298,7 +299,7 @@ export default function Deposit() {
                     </div>
                   </div>
                   <p className="mt-2 text-sm text-gray-400">
-                    Send only <span className="font-medium">{selectedCrypto.toUpperCase()}</span> to this address
+                    Send only <span className="font-medium">{selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span> to this address
                   </p>
                 </div>
                 
@@ -306,7 +307,7 @@ export default function Deposit() {
                   <div className="flex">
                     <AlertTriangle className="h-5 w-5 text-yellow-500 mr-2 flex-shrink-0" />
                     <p className="text-sm text-yellow-200">
-                      Important: Please verify the address before sending. Minimum deposit is <span className="font-medium">{minDeposit} {selectedCrypto.toUpperCase()}</span>.
+                      Important: Please verify the address before sending. Minimum deposit is <span className="font-medium">{minDeposit} {selectedCrypto === 'solana' ? 'SOL' : 'SUI'}</span>.
                     </p>
                   </div>
                 </div>
