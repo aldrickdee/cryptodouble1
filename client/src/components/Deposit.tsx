@@ -95,7 +95,7 @@ export default function Deposit() {
       bgImage={bgImage}
       className="py-20 lg:py-32 bg-primary"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 bg-black/40 rounded-xl backdrop-blur-sm">
         {/* Mobile View */}
         <div className="lg:hidden">
           <div className="text-center mb-10">

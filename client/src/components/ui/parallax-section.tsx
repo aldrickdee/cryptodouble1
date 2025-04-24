@@ -17,7 +17,7 @@ export default function ParallaxSection({
 }: ParallaxSectionProps) {
   return (
     <section id={id} className={cn("relative overflow-hidden", className)}>
-      <div className="absolute inset-0 bg-black/60 z-0"></div>
+      <div className="absolute inset-0 bg-black/80 z-0"></div>
       <Parallax speed={-10} className="absolute inset-0 z-0">
         <div 
           className="h-full w-full bg-cover bg-center bg-no-repeat" 
