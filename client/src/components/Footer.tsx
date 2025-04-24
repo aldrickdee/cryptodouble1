@@ -1,10 +1,26 @@
+import { useState } from 'react';
 import { Link } from 'wouter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Mail, ShoppingBag } from 'lucide-react';
 import logoImage from '@/assets/CryptoDouble.png';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Footer() {
+  const [email, setEmail] = useState<string>('');
+  const { toast } = useToast();
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      toast({
+        title: "Newsletter Subscription",
+        description: "Your email has been added to our newsletter!",
+      });
+      setEmail('');
+    }
+  };
+
   return (
     <footer className="bg-secondary py-12 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,11 +68,14 @@ export default function Footer() {
             </ul>
             
             <h3 className="text-lg font-semibold text-white mt-6 mb-4">Newsletter</h3>
-            <form className="flex">
+            <form className="flex" onSubmit={handleSubscribe}>
               <Input 
                 type="email" 
                 placeholder="Your email" 
                 className="rounded-r-none" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
               <Button 
                 type="submit" 
