@@ -3,6 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
+import logoImage from '@/assets/CryptoDouble.png';
 
 const navItems = [
   { name: "How It Works", href: "#how-it-works" },
@@ -38,7 +39,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-blue-500 text-2xl font-bold">CryptoDouble</span>
+            <img src={logoImage} alt="CryptoDouble Logo" className="h-10 w-10" />
+            <span className="text-white text-2xl font-bold">CryptoDouble</span>
           </Link>
         </div>
         
@@ -60,7 +62,7 @@ export default function Navbar() {
             <a 
               key={item.name}
               href={item.href}
-              className="text-sm font-medium hover:text-blue-500 transition-colors"
+              className="text-sm font-medium text-white hover:text-blue-500 transition-colors"
             >
               {item.name}
             </a>
@@ -83,7 +85,7 @@ export default function Navbar() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block py-4 px-3 text-base font-medium hover:text-blue-500 transition-colors rounded-xl hover:bg-white/5 active:bg-white/10 flex items-center"
+                  className="block py-4 px-3 text-base font-medium text-white hover:text-blue-500 transition-colors rounded-xl hover:bg-white/5 active:bg-white/10 flex items-center"
                   onClick={() => setIsOpen(false)}
                 >
                   <span className="ml-2">{item.name}</span>

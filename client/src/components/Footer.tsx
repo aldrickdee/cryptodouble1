@@ -2,6 +2,7 @@ import { Link } from 'wouter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Mail, ShoppingBag } from 'lucide-react';
+import logoImage from '@/assets/CryptoDouble.png';
 
 export default function Footer() {
   return (
