@@ -116,7 +116,7 @@ export default function Deposit() {
                   viewport={{ once: true, margin: "-100px" }}
                 >
                   <div className="flex items-center mb-3">
-                    <div className="h-9 w-9 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center font-bold text-white mr-3">
+                    <div className="h-9 w-9 rounded-full bg-blue-500 flex items-center justify-center font-bold text-white mr-3">
                       {step.number}
                     </div>
                     <h3 className="text-base font-medium">{step.title}</h3>
@@ -215,7 +215,7 @@ export default function Deposit() {
                   
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 py-6 h-auto rounded-xl text-white font-medium text-base shadow-lg"
+                    className="w-full bg-blue-500 hover:opacity-90 py-6 h-auto rounded-xl text-white font-medium text-base shadow-lg"
                   >
                     I've Made My Deposit
                   </Button>
@@ -334,7 +334,7 @@ export default function Deposit() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-purple-500 hover:bg-purple-600 mt-6"
+                      className="w-full bg-blue-500 hover:bg-blue-600 mt-6"
                     >
                       I've Made My Deposit
                     </Button>

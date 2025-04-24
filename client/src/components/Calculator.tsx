@@ -133,14 +133,14 @@ export default function Calculator() {
                     </div>
                   </div>
                   
-                  <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl p-4 border border-blue-500/30">
+                  <div className="bg-blue-500/20 rounded-xl p-4 border border-blue-500/30">
                     <div className="flex items-center mb-2">
                       <ArrowDown className="h-5 w-5 text-blue-500 mr-2" />
                       <p className="text-sm text-blue-400">Doubled Return</p>
                     </div>
                     <div className="flex justify-between items-center">
                       <motion.span 
-                        className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
+                        className="text-3xl font-bold text-blue-500"
                         animate={{ 
                           scale: [1, 1.03, 1],
                           transition: { duration: 0.4 }
@@ -172,7 +172,7 @@ export default function Calculator() {
                 <div className="mt-6">
                   <Button 
                     onClick={handleMobileCalculate} 
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 py-6 rounded-xl text-white font-bold text-lg shadow-lg"
+                    className="w-full bg-blue-500 hover:opacity-90 py-6 rounded-xl text-white font-bold text-lg shadow-lg"
                   >
                     Calculate Returns
                   </Button>
@@ -328,7 +328,7 @@ export default function Calculator() {
               
               <div className="mt-8">
                 <Button 
-                  className="w-full bg-purple-500 hover:bg-purple-600"
+                  className="w-full bg-blue-500 hover:bg-blue-600"
                   asChild
                 >
                   <a href="#deposit">Double My Investment Now</a>

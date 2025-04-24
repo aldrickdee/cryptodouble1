@@ -22,7 +22,7 @@ export default function MobileNav() {
         
         <a 
           href="#deposit" 
-          className="flex flex-col items-center p-3 px-5 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white -mt-5 shadow-lg relative z-10"
+          className="flex flex-col items-center p-3 px-5 rounded-lg bg-blue-500 text-white -mt-5 shadow-lg relative z-10"
         >
           <DollarSign className="h-6 w-6" />
           <span className="text-xs mt-1 font-medium">Deposit</span>
