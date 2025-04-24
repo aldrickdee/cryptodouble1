@@ -115,7 +115,7 @@ export default function LiveTransactions() {
                         <span className="text-xs font-bold text-white">SUI</span>
                       </div>
                     )}
-                    <span>{tx.type === 'solana' ? 'Solana' : 'SUI'}</span>
+                    <span>{tx.type === 'solana' ? 'SOL' : 'SUI'}</span>
                   </div>
                   
                   <div className="flex-1 font-medium">

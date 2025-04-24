@@ -270,7 +270,7 @@ export default function Deposit() {
                       onClick={() => setSelectedCrypto('solana')}
                     >
                       <SolanaIcon />
-                      <span className="font-medium">Solana</span>
+                      <span className="font-medium">SOL</span>
                     </Button>
                     <Button
                       type="button"
